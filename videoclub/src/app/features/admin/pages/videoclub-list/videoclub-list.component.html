@@ -1,1 +1,35 @@
-<p>videoclub-list works!</p>
+<!-- videoclub-list.component.html -->
+<h2>Videoclubs</h2>
+
+<button (click)="irANuevo()">Nuevo Videoclub</button>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<table *ngIf="!loading && videoclubs.length">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Gerente</th>
+      <th>Ciudad</th>
+      <th>Calle</th>
+      <th>C.P.</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let v of videoclubs">
+      <td>{{ v.codigoVideoclub }}</td>
+      <td>{{ v.nombreGerente }}</td>
+      <td>{{ v.ciudad }}</td>
+      <td>{{ v.calle }}</td>
+      <td>{{ v.codigoPostal }}</td>
+      <td>
+        <button (click)="editar(v)">Editar</button>
+        <button (click)="eliminar(v)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!loading && !videoclubs.length">No hay videoclubs aún.</p>

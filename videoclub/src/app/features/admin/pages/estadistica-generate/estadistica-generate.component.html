@@ -1,1 +1,45 @@
-<p>estadistica-generate works!</p>
+<!-- estadistica-generate.component.html -->
+<h2>Generar Estadística Mensual</h2>
+
+<form [formGroup]="form" (ngSubmit)="generar()">
+  <div>
+    <label>Socio</label>
+    <select formControlName="socioId">
+      <option [ngValue]="null">-- Selecciona socio --</option>
+      <option *ngFor="let s of socios" [ngValue]="s.idSocio">
+        {{ s.idSocio }} - {{ s.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Mes</label>
+    <input type="number" formControlName="mes" min="1" max="12" />
+  </div>
+
+  <div>
+    <label>Año</label>
+    <input type="number" formControlName="anio" />
+  </div>
+
+  <div>
+    <label>Fecha de creación</label>
+    <input type="datetime-local" formControlName="fechaCreacion" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || loading">
+    Generar estadística
+  </button>
+</form>
+
+<div *ngIf="loading">Procesando...</div>
+<div *ngIf="mensaje" class="ok">{{ mensaje }}</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="estadisticaGenerada">
+  <h3>Resultado</h3>
+  <p>ID estadística: {{ estadisticaGenerada.idEstadistica }}</p>
+  <p>Total gastado: {{ estadisticaGenerada.totalGastado }} €</p>
+  <p>Mes/Año: {{ estadisticaGenerada.mes }}/{{ estadisticaGenerada.anio }}</p>
+  <p>Fecha creación: {{ estadisticaGenerada.fechaCreacion | date:'short' }}</p>
+</div>
