@@ -1,0 +1,12 @@
+<!-- confirm-dialog.component.html -->
+<div class="backdrop" *ngIf="show">
+  <div class="dialog">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+
+    <div class="actions">
+      <button (click)="onCancel()">Cancelar</button>
+      <button (click)="onConfirm()">Aceptar</button>
+    </div>
+  </div>
+</div>
