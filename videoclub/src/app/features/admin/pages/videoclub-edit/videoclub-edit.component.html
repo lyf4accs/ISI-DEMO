@@ -1,1 +1,31 @@
-<p>videoclub-edit works!</p>
+<!-- videoclub-edit.component.html -->
+<h2 *ngIf="videoclubId; else altaTpl">Editar Videoclub</h2>
+<ng-template #altaTpl><h2>Alta de Videoclub</h2></ng-template>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label>Nombre gerente</label>
+    <input type="text" formControlName="nombreGerente" />
+  </div>
+  <div>
+    <label>Ciudad</label>
+    <input type="text" formControlName="ciudad" />
+  </div>
+  <div>
+    <label>Calle</label>
+    <input type="text" formControlName="calle" />
+  </div>
+  <div>
+    <label>Código Postal</label>
+    <input type="text" formControlName="codigoPostal" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || loading">
+    Guardar
+  </button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+
+  <div *ngIf="loading">Guardando...</div>
+  <div *ngIf="mensaje" class="ok">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</form>

@@ -1,1 +1,21 @@
-<p>admin-login works!</p>
+<h2>Login Administrador</h2>
+
+<div *ngIf="loading">Cargando administradores...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<form [formGroup]="form" (ngSubmit)="login()" *ngIf="!loading && admins.length">
+  <label>Selecciona administrador</label>
+  <select formControlName="adminId">
+    <option [ngValue]="null">-- Selecciona admin --</option>
+    <option *ngFor="let a of admins" [ngValue]="a.idAdmin">
+      {{ a.idAdmin }} - {{ a.nombre }}
+    </option>
+  </select>
+
+  <button type="submit" [disabled]="form.invalid">Entrar</button>
+</form>
+
+<p *ngIf="!loading && !admins.length">
+  No hay administradores creados.
+  Añade uno desde la base de datos o crea un botón de creación si lo deseas.
+</p>

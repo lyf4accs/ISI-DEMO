@@ -1,1 +1,29 @@
-<p>socio-list works!</p>
+<!-- socio-list.component.html -->
+<h2>Socios</h2>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<table *ngIf="!loading && socios.length">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of socios">
+      <td>{{ s.idSocio }}</td>
+      <td>{{ s.nombre }}</td>
+      <td>{{ s.edad }}</td>
+      <td>
+        <button (click)="editar(s)">Editar</button>
+        <button (click)="eliminar(s)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!loading && !socios.length">No hay socios.</p>

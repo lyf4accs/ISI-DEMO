@@ -1,1 +1,29 @@
-<p>pelicula-edit works!</p>
+<!-- pelicula-edit.component.html -->
+<h2 *ngIf="peliculaId; else altaPeliculaTpl">Editar Película</h2>
+<ng-template #altaPeliculaTpl><h2>Alta de Película</h2></ng-template>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label>Nombre</label>
+    <input type="text" formControlName="nombre" />
+  </div>
+  <div>
+    <label>Director</label>
+    <input type="text" formControlName="director" />
+  </div>
+  <div>
+    <label>Fecha de estreno</label>
+    <input type="date" formControlName="fechaDeEstreno" />
+  </div>
+  <div>
+    <label>Precio alquiler (€)</label>
+    <input type="number" formControlName="precioAlquiler" step="0.01" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || loading">Guardar</button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+
+  <div *ngIf="loading">Guardando...</div>
+  <div *ngIf="mensaje" class="ok">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</form>
