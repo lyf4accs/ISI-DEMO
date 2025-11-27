@@ -1,0 +1,12 @@
+<!-- navbar.component.html -->
+<nav class="navbar">
+  <a routerLink="/" routerLinkActive="active">Inicio</a>
+
+  <a *ngIf="isAdmin" routerLink="/admin" routerLinkActive="active">Admin</a>
+  <a *ngIf="isLogged && !isAdmin" routerLink="/socio" routerLinkActive="active">Socio</a>
+
+  <span class="spacer"></span>
+
+  <button *ngIf="!isLogged">Login</button>
+  <button *ngIf="isLogged">Logout</button>
+</nav>
