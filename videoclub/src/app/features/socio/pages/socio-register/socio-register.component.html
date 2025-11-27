@@ -1,1 +1,21 @@
-<p>socio-register works!</p>
+<!-- socio-register.component.html -->
+<h2>Registro de socio</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Nombre</label>
+    <input type="text" formControlName="nombre" />
+  </div>
+  <div>
+    <label>Edad</label>
+    <input type="number" formControlName="edad" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || loading">
+    Registrarse
+  </button>
+
+  <div *ngIf="loading">Guardando...</div>
+  <div *ngIf="mensaje" class="ok">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</form>

@@ -1,1 +1,32 @@
-<p>alquiler-list works!</p>
+<!-- alquiler-list.component.html -->
+<h2>Mis alquileres</h2>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<table *ngIf="!loading && alquileres.length">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Fecha recogida</th>
+      <th>Fecha devolución</th>
+      <th>Total pagar (€)</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of alquileres">
+      <td>{{ a.codigoAlquiler }}</td>
+      <td>{{ a.fechaRecogida | date }}</td>
+      <td>{{ a.fechaDevolucion | date }}</td>
+      <td>{{ a.totalPagar | number : '1.2-2' }}</td>
+      <td>
+        <button (click)="editarFecha(a)">Modificar fecha devolución</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!loading && !alquileres.length">
+  No tienes alquileres todavía.
+</p>

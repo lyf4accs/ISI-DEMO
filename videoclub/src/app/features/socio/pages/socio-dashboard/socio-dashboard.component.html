@@ -1,1 +1,16 @@
-<p>socio-dashboard works!</p>
+<!-- socio-dashboard.component.html -->
+<h1>Área de Socio</h1>
+
+<p *ngIf="socioId; else noSocioTpl">
+  Socio actual: {{ socioId }}
+</p>
+
+<ng-template #noSocioTpl>
+  <p>No hay socio seleccionado. Regístrate o reutiliza uno existente.</p>
+</ng-template>
+
+<nav>
+  <a routerLink="/socio/registro">Registro de socio</a> |
+  <a routerLink="/socio/alquileres/nuevo">Nuevo alquiler</a> |
+  <a routerLink="/socio/alquileres">Mis alquileres</a>
+</nav>

@@ -1,1 +1,18 @@
-<p>alquiler-edit-fecha works!</p>
+<!-- alquiler-edit-fecha.component.html -->
+<h2>Modificar fecha de devolución</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label>Nueva fecha de devolución</label>
+    <input type="date" formControlName="nuevaFechaDevolucion" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || loading">
+    Guardar
+  </button>
+  <button type="button" (click)="volver()">Volver</button>
+
+  <div *ngIf="loading">Guardando...</div>
+  <div *ngIf="mensaje" class="ok">{{ mensaje }}</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</form>
